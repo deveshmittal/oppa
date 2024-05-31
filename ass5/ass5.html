@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Functions Test</title>
+    <script>
+        /* runs test to see if expected argument is === to value returned by function2test argument */
+        function myFunctionTest(expected, found) {
+            if (expected === found) {
+                return "TEST SUCCEEDED";
+            } else {
+                return "TEST FAILED. Expected " + expected + " found " + found;
+            }
+        }
+
+        /* max returns the maximum of 2 arguments */
+        function max(a, b) {
+            if (a > b) {
+                return a;
+            } else {
+                return b;
+            }
+        }
+        console.log("Expected output of max(20,10) is 20  " + myFunctionTest(20, max(20, 10)));
+
+        /* maxOfThree takes 3 numbers as arguments and returns the largest */
+        function maxOfThree(a, b, c) {
+            return max(max(a, b), c);
+        }
+        console.log("Expected output of maxOfThree(5,4,44) is 44  " + myFunctionTest(44, maxOfThree(5, 4, 44)));
+        console.log("Expected output of maxOfThree(55,4,44) is 55  " + myFunctionTest(55, maxOfThree(55, 4, 44)));
+        console.log("Expected output of maxOfThree(55,4,44) is 55  " + myFunctionTest(4, maxOfThree(55, 4, 44)));
+
+        /* isVowel checks if a character is a vowel */
+        function isVowel(char) {
+            const vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+            return vowels.includes(char);
+        }
+        console.log("Expected output of isVowel('a') is true  " + myFunctionTest(true, isVowel('a')));
+        console.log("Expected output of isVowel('b') is false  " + myFunctionTest(false, isVowel('b')));
+        console.log("Expected output of isVowel('E') is true  " + myFunctionTest(true, isVowel('E')));
+
+        /* sum sums all numbers in an array */
+        function sum(numbers) {
+            return numbers.reduce((total, num) => total + num, 0);
+        }
+        console.log("Expected output of sum([1,2,3,4]) is 10  " + myFunctionTest(10, sum([1, 2, 3, 4])));
+        console.log("Expected output of sum([5,10,15]) is 30  " + myFunctionTest(30, sum([5, 10, 15])));
+
+        /* multiply multiplies all numbers in an array */
+        function multiply(numbers) {
+            return numbers.reduce((product, num) => product * num, 1);
+        }
+        console.log("Expected output of multiply([1,2,3,4]) is 24  " + myFunctionTest(24, multiply([1, 2, 3, 4])));
+        console.log("Expected output of multiply([2,3,4]) is 24  " + myFunctionTest(24, multiply([2, 3, 4])));
+
+        /* reverse computes the reversal of a string */
+        function reverse(str) {
+            return str.split('').reverse().join('');
+        }
+        console.log("Expected output of reverse('jag testar') is 'ratset gaj'  " + myFunctionTest('ratset gaj', reverse('jag testar')));
+        console.log("Expected output of reverse('JavaScript') is 'tpircSavaJ'  " + myFunctionTest('tpircSavaJ', reverse('JavaScript')));
+
+        /* findLongestWord returns the length of the longest word in an array */
+        function findLongestWord(words) {
+            return Math.max(...words.map(word => word.length));
+        }
+        console.log("Expected output of findLongestWord(['apple', 'banana', 'cherry']) is 6  " + myFunctionTest(6, findLongestWord(['apple', 'banana', 'cherry'])));
+        console.log("Expected output of findLongestWord(['hello', 'world', 'JavaScript']) is 10  " + myFunctionTest(10, findLongestWord(['hello', 'world', 'JavaScript'])));
+
+        /* filterLongWords returns words longer than a given length */
+        function filterLongWords(words, length) {
+            return words.filter(word => word.length > length);
+        }
+        console.log("Expected output of filterLongWords(['apple', 'banana', 'cherry'], 5) is ['banana', 'cherry']  " + myFunctionTest(JSON.stringify(['banana', 'cherry']), JSON.stringify(filterLongWords(['apple', 'banana', 'cherry'], 5))));
+        console.log("Expected output of filterLongWords(['hello', 'world', 'JavaScript'], 5) is ['JavaScript']  " + myFunctionTest(JSON.stringify(['JavaScript']), JSON.stringify(filterLongWords(['hello', 'world', 'JavaScript'], 5))));
+    </script>
+</head>
+<body>
+    Look in the Chrome developer console to see the output. CTRL_SHIFT_J <br />
+    Or on Firefox with CTRL_SHIFT_K
+</body>
+</html>
+
