@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Function Testing</title>
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css">
+</head>
+<body>
+    <h1>JavaScript Function Testing with Mocha and Chai</h1>
+    <div id="mocha"></div>
+
+    <script src="https://unpkg.com/mocha/mocha.js"></script>
+    <script src="https://unpkg.com/chai/chai.js"></script>
+    <script>mocha.setup('bdd');</script>
+
+    <script>
+
+        function sum(numbers) {
+            return numbers.reduce((total, num) => total + num, 0);
+        }
+
+        function multiply(numbers) {
+            return numbers.reduce((product, num) => product * num, 1);
+        }
+
+        function reverse(str) {
+            return str.split('').reverse().join('');
+        }
+
+        function filterLongWords(words, i) {
+            return words.filter(word => word.length > i);
+        }
+
+
+        const assert = chai.assert;
+
+        describe('Array Functions', function() {
+            it('should sum all the numbers in an array', function() {
+                assert.equal(sum([1, 2, 3, 4]), 10);
+            });
+
+            it('should multiply all the numbers in an array', function() {
+                assert.equal(multiply([1, 2, 3, 4]), 24);
+            });
+
+            it('should reverse a string', function() {
+                assert.equal(reverse('hello'), 'olleh');
+            });
+
+            it('should filter words longer than a given length', function() {
+                assert.deepEqual(filterLongWords(['hello', 'world', 'js', 'mocha'], 4), ['hello', 'world']);
+            });
+        });
+
+        mocha.run();
+    </script>
+
+    <h2>Regular Expression Form Validation</h2>
+    <form id="myForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const url = document.getElementById('url').value;
+            const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}$/;
+            const urlPattern = /^(http:\/\/|https:\/\/)/;
+
+            if (!passwordPattern.test(password)) {
+                alert('Password must be at least 10 characters long and contain at least one number, one uppercase and one lowercase letter.');
+                event.preventDefault();
+            }
+
+            if (!urlPattern.test(url)) {
+                alert('URL must begin with "http://" or "https://".');
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
