@@ -1,4 +1,4 @@
-const Account = require('./account');
+const Account = require('./account.js');
 
 class CheckingAccount extends Account {
     constructor(number, overdraftLimit) {
@@ -10,16 +10,16 @@ class CheckingAccount extends Account {
         return this._overdraftLimit;
     }
 
-    setOverdraftLimit(limit) {
-        this._overdraftLimit = limit;
+    setOverdraftLimit(overdraftLimit) {
+        this._overdraftLimit = overdraftLimit;
     }
 
     withdraw(amount) {
         if (amount <= 0) {
             throw new RangeError("Withdraw amount has to be greater than zero");
         }
-        if (amount > (this.getBalance() + this._overdraftLimit)) {
-            throw Error("Insufficient funds, overdraft limit reached");
+        if (amount > this._balance + this._overdraftLimit) {
+            throw Error("Insufficient funds, overdraft limit exceeded");
         }
         this._balance -= amount;
     }

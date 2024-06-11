@@ -1,4 +1,4 @@
-const Account = require('./account');
+const Account = require('./account.js');
 
 class SavingsAccount extends Account {
     constructor(number, interest) {
@@ -15,9 +15,8 @@ class SavingsAccount extends Account {
     }
 
     addInterest() {
-        let interestAmount = this.getBalance() * this._interest / 100;
+        const interestAmount = (this.getBalance() * this._interest) / 100;
         this.deposit(interestAmount);
-        return interestAmount;
     }
 
     toString() {
@@ -25,8 +24,8 @@ class SavingsAccount extends Account {
     }
 
     endOfMonth() {
-        let interest = this.addInterest();
-        return `Interest added SavingsAccount ${this.getNumber()}: balance: ${this.getBalance()} interest: ${interest}`;
+        this.addInterest();
+        return `Interest added SavingsAccount ${this.getNumber()}: balance: ${this.getBalance()} interest: ${this._interest}`;
     }
 }
 

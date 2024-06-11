@@ -1,42 +1,42 @@
-const Account = require('./account');
-const SavingsAccount = require('./savingsaccount');
-const CheckingAccount = require('./checkingaccount');
+const Account = require('./account.js');
+const SavingsAccount = require('./savingsaccount.js');
+const CheckingAccount = require('./checkingaccount.js');
 
 class Bank {
     static nextNumber = 1;
 
     constructor() {
-        this._accounts = [];
+        this.accounts = [];
     }
 
     addAccount() {
-        const newAccount = new Account(Bank.nextNumber++);
-        this._accounts.push(newAccount);
-        return newAccount.getNumber();
+        const account = new Account(Bank.nextNumber++);
+        this.accounts.push(account);
+        return account.getNumber();
     }
 
     addSavingsAccount(interest) {
-        const newAccount = new SavingsAccount(Bank.nextNumber++, interest);
-        this._accounts.push(newAccount);
-        return newAccount.getNumber();
+        const account = new SavingsAccount(Bank.nextNumber++, interest);
+        this.accounts.push(account);
+        return account.getNumber();
     }
 
     addCheckingAccount(overdraft) {
-        const newAccount = new CheckingAccount(Bank.nextNumber++, overdraft);
-        this._accounts.push(newAccount);
-        return newAccount.getNumber();
+        const account = new CheckingAccount(Bank.nextNumber++, overdraft);
+        this.accounts.push(account);
+        return account.getNumber();
     }
 
     closeAccount(number) {
-        this._accounts = this._accounts.filter(acc => acc.getNumber() !== number);
+        this.accounts = this.accounts.filter(account => account.getNumber() !== number);
     }
 
     accountReport() {
-        return this._accounts.map(acc => acc.toString()).join("\n");
+        return this.accounts.map(account => account.toString()).join('\n');
     }
 
     endOfMonth() {
-        return this._accounts.map(acc => acc.endOfMonth()).filter(report => report !== "").join("\n");
+        return this.accounts.map(account => account.endOfMonth()).filter(report => report !== "").join('\n');
     }
 }
 
