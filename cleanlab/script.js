@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    let intervalId;
+    let intervalIds = [];
 
     $('#start').click(function(){
         clearExistingIntervals();  // Clear any existing intervals to prevent multiple interval issues
-        
+
         var width = parseInt($('#width').val());
         var growth = parseInt($('#growth').val());
         var interval = parseInt($('#interval').val());
@@ -21,13 +21,14 @@ $(document).ready(function(){
             $('body').append(circle);
         }
 
-        intervalId = setInterval(function(){
+        var intervalId = setInterval(function(){
             $('.circle').each(function(){
                 var newSize = $(this).width() + growth;
                 $(this).width(newSize);
                 $(this).height(newSize);
             });
         }, interval);
+        intervalIds.push(intervalId);
     });
 
     $('#clear').click(function(){
@@ -48,9 +49,10 @@ $(document).ready(function(){
     });
 
     function clearExistingIntervals() {
-        if (intervalId) {
-            clearInterval(intervalId);
-        }
+        intervalIds.forEach(function(id) {
+            clearInterval(id);
+        });
+        intervalIds = [];
     }
 
     function getRandomColor() {
