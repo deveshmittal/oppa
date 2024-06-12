@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     $(".boundary").on("mouseover", function() {
         $(".boundary").addClass("youlose");
+        $("#status").text("Sorry, you lost. :[");
         gameLost = true;
     });
 
@@ -14,13 +15,14 @@ $(document).ready(function() {
 
     $("#end").on("mouseover", function() {
         if (!gameLost) {
-            alert("You win!");
+            alert("You win! :)");
         }
     });
 
     $("#maze").on("mouseleave", function() {
         if (!gameLost) {
             $(".boundary").addClass("youlose");
+            $("#status").text("Sorry, you lost. :[");
             gameLost = true;
         }
     });
