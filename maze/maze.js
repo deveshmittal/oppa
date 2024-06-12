@@ -1,29 +1,51 @@
+/* jshint esversion: 6 */
 $(document).ready(function() {
-    let gameLost = false;
+    "use strict";
 
-    $(".boundary").on("mouseover", function() {
-        $(".boundary").addClass("youlose");
-        $("#status").text("Sorry, you lost. :[");
-        gameLost = true;
+    let $boundaries = $(".boundary");
+    let $maze = $("#maze");
+    let $status = $("#status");
+    let $start = $("#start");
+    let $end = $("#end");
+
+    $boundaries.mouseenter(function() {
+       lose();
     });
 
-    $("#start").on("click", function() {
-        $(".boundary").removeClass("youlose");
-        $("#status").text("Move your mouse over the \"S\" to begin.");
-        gameLost = false;
+    $maze.mouseleave(function () {
+        lose();
     });
 
-    $("#end").on("mouseover", function() {
-        if (!gameLost) {
-            alert("You win! :)");
+    let lose = function() {
+        if (!$boundaries.hasClass("youlose")) {
+            $boundaries.addClass("youlose");
+            if ($boundaries.hasClass("started")) {
+                $boundaries.removeClass("started");
+            }
+            updateStatus("Sorry, you lost. :[");
+        }
+    };
+
+    let updateStatus = function(msg) {
+        $status.text(msg);
+    };
+
+    $end.mouseenter(function () {
+        if (!$boundaries.hasClass("youlose")) {
+            if ($boundaries.hasClass("started")) {
+                updateStatus("You win! :]");
+            }
         }
     });
 
-    $("#maze").on("mouseleave", function() {
-        if (!gameLost) {
-            $(".boundary").addClass("youlose");
-            $("#status").text("Sorry, you lost. :[");
-            gameLost = true;
+    $start.click(function () {
+        if ($boundaries.hasClass("youlose")) {
+            $boundaries.removeClass("youlose");
+            if (!$boundaries.hasClass("started")) {
+                $boundaries.addClass("started");
+            }
+            updateStatus("You are playing now.");
         }
     });
+
 });
