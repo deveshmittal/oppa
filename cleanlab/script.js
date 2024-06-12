@@ -2,6 +2,8 @@ $(document).ready(function(){
     let intervalId;
 
     $('#start').click(function(){
+        clearExistingIntervals();  // Clear any existing intervals to prevent multiple interval issues
+        
         var width = parseInt($('#width').val());
         var growth = parseInt($('#growth').val());
         var interval = parseInt($('#interval').val());
@@ -29,7 +31,7 @@ $(document).ready(function(){
     });
 
     $('#clear').click(function(){
-        clearInterval(intervalId);
+        clearExistingIntervals();
         $('.circle').remove();
     });
 
@@ -44,6 +46,12 @@ $(document).ready(function(){
     $(document).on('mouseleave', '.circle', function(){
         $(this).fadeTo('fast', 1);
     });
+
+    function clearExistingIntervals() {
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+    }
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
