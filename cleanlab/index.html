@@ -7,16 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div>
-        <label for="width">Width:</label>
-        <input type="text" id="width" value="50">
-        <label for="growth">Growth Amount:</label>
-        <input type="text" id="growth" value="10">
-        <label for="interval">Interval:</label>
-        <input type="text" id="interval" value="250">
-        <label for="numberCircles">Number of Circles:</label>
-        <input type="text" id="numberCircles" value="12">
+    <div class="controls">
+        <div class="input-group">
+            <label for="width">Width:</label>
+            <input type="text" id="width" value="50">
+        </div>
+        <div class="input-group">
+            <label for="growth">Growth Amount:</label>
+            <input type="text" id="growth" value="10">
+        </div>
+        <div class="input-group">
+            <label for="interval">Interval:</label>
+            <input type="text" id="interval" value="250">
+        </div>
+        <div class="input-group">
+            <label for="numberCircles">Number of Circles:</label>
+            <input type="text" id="numberCircles" value="12">
+        </div>
         <button id="start">Start</button>
+        <button id="clear">Clear</button>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>

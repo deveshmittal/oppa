@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    let intervalId;
+
     $('#start').click(function(){
         var width = parseInt($('#width').val());
         var growth = parseInt($('#growth').val());
@@ -17,13 +19,18 @@ $(document).ready(function(){
             $('body').append(circle);
         }
 
-        setInterval(function(){
+        intervalId = setInterval(function(){
             $('.circle').each(function(){
                 var newSize = $(this).width() + growth;
                 $(this).width(newSize);
                 $(this).height(newSize);
             });
         }, interval);
+    });
+
+    $('#clear').click(function(){
+        clearInterval(intervalId);
+        $('.circle').remove();
     });
 
     $(document).on('click', '.circle', function(){
