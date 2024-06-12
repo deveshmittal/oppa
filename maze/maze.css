@@ -1,0 +1,10 @@
+.boundary {
+    width: 400px;
+    height: 20px;
+    background-color: #eeeeee;
+    position: relative;
+    margin: 10px 0;
+}
+.youlose {
+    background-color: red;
+}
